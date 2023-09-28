@@ -1,0 +1,255 @@
+// TFPX double-disk materials.
+// Amounts of materials are PER DOUBLE-DISK (= 4 dees!!)
+
+Materials FPIX_disk {
+  type layer
+
+
+  // Modules Cooling.
+  // Material LOCAL to the dees.
+  // ID = 2.4 mm, OD = 3.02 mm flower pattern design
+  Component {
+    componentName "Cooling: Pipes & Coolant (on dees)"
+    // location dee  // MB fully works but still need to fix overlaps
+    service false
+    scaleOnSensor 0
+    Element {
+      elementName StainlessSteel
+      quantity 135.24                   // 33.81 g (pipe flower petal) * 4 (all dees)
+      					//Source: [Joseph Grassi jdg282@cornell.edu, Cornell CMS TFPX Group]
+                                      // APPROXIMATION: uniform mass distribution in a disk volume!
+      unit g
+    }
+    Element {
+      elementName CO2
+      quantity 41.8                     // 10.45 g (per flower tube) * 4 (all dees)
+      unit g
+    }
+  }
+  
+  
+  // Modules Cooling.
+  // 8 pipes (inlet or outlets) ROUTED: 2 for each dee.
+  // ID = 2.4 mm, OD = 3.02 mm flower pattern.
+  // NB: evth 'divided by 1000', so that the value routed along the dee is negligible (x 1000 conversion at the edge of the dee).
+  Component {
+    componentName "Cooling: Pipes & Coolant (routed)"
+    // location dee  // MB fully works but still need to fix overlaps
+    service true
+    scaleOnSensor 0
+    Element {
+      elementName StainlessSteel_fake1000factor
+      quantity 0.1694                 // = 8.02 g/cm^3 (SS density) /1000 (to g/mm^3) * 2.64 mm^2 (SS cross-section) * 1000 (to g/m) * 8 (# pipes) / 1000 (fake factor)
+                                      // Source: [Joseph Grassi jdg282@cornell.edu, Cornell CMS TFPX Group]
+                                      // APPROXIMATION: uniform mass distribution in a cylinder!
+      unit g/m
+    }
+    Element {
+      elementName CO2_fake1000factor
+      quantity 0.0362                  // = 1.0 g/cm^3 (CO2 density) /1000 (to g/mm^3) * 4.52 mm^2 (CO2 cross-section) * 1000 (to g/m) * 8 (# pipes) / 1000 (fake factor)
+                                      // Source: [Joseph Grassi jdg282@cornell.edu, Cornell CMS TFPX Group]
+                                      // APPROXIMATION: uniform mass distribution in a cylinder!
+      unit g/m
+    }
+  }
+
+
+  // Power for the module
+  // Average on disk
+  // 16 power chains per disk
+  Component {
+    componentName "Cabling: Serial power chains (on dees)"
+    service false
+    scaleOnSensor 0
+    Element {
+      elementName Al
+      quantity 13.52
+      unit g
+    }
+    Element {
+      elementName Cu
+      quantity 1.84
+      unit g
+    }
+    Element {
+      elementName PE
+      quantity 4.91
+      unit g
+    }
+  }
+  
+  
+  // fake numbers for calculating conversion with a factor of 1000
+  // 16 power chains per disk
+  Component {
+    componentName "Cabling: Serial power chains (routed)"
+    service true
+    scaleOnSensor 0
+    Element {
+      elementName FPIX_Al
+      quantity 0.0978
+      unit g/m
+    }
+    Element {
+      elementName FPIX_Cu
+      quantity 0.0133
+      unit g/m
+    }
+    Element {
+      elementName FPIX_PE
+      quantity 0.0352
+      unit g/m
+    }
+  }
+
+
+  // HV power lines
+  // 16 power chains per disk, 2 HV lines per power chain
+  Component {
+    componentName "Cabling: High voltage lines (on dees)"
+    service false
+    scaleOnSensor 0
+    Element {
+      elementName Al_HV
+      quantity 1.56
+      unit g
+    }
+    Element {
+      elementName Cu
+      quantity 0.55
+      unit g
+    }
+    Element {
+      elementName PE
+      quantity 5.6
+      unit g
+    }
+  }
+  
+  
+  // fake numbers for calculating conversion with a factor of 1000
+  // 16 power chains per disk, 2 HV lines per power chain
+  Component {
+    componentName "Cabling: High voltage lines (routed)"
+    service true
+    scaleOnSensor 0
+    Element {
+      elementName FPIX_Al_HV
+      quantity 0.0073
+      unit g/m
+    }
+    Element {
+      elementName FPIX_Cu
+      quantity 0.0026
+      unit g/m
+    }
+    Element {
+      elementName FPIX_PE
+      quantity 0.0264
+      unit g/m
+    }
+  }
+ 
+  
+  // Supports Mechanics: Carbon foam panel
+  Component {
+    componentName "Supports Mechanics: Dee Carbon foam panel"
+    // location dee  // MB fully works but still need to fix overlaps
+    service false
+    scaleOnSensor 0
+ 
+    Element {
+      elementName Carbon_foam_FPX
+      quantity 156.72      // = 39.18 g (per panel) * 4 (4 dees per cartridge)
+                            // Each dee may be either one panel or split into two panels (undecided). The total mass of carbon foam will remain the same however.
+                            // Source: [TFPX_2019_03_19_YP].                           
+      unit g                // APPROXIMATION: mass spread across a uniform disk cylinder.
+
+    }   
+  }
+  
+    
+  // Supports Mechanics: CFRP panel
+  Component {
+    componentName "Supports Mechanics: Dee CFRP panel"
+    // location dee  // MB fully works but still need to fix overlaps
+    service false
+    scaleOnSensor 0
+ 
+    Element {
+      elementName CFRP_FPX
+      quantity 123.12      // = 15.39 g (per panel) * 2 (2 panels per dee) * 4 (4 dees per cartridge).
+                            // Source: [Joseph Grassi jdg282@cornell.edu, Cornell CMS TFPX Group].                           
+      unit g                // APPROXIMATION: mass spread across a uniform disk cylinder.
+
+    }   
+  }
+  
+    // Supports Mechanics: CFRP Panel Loaded Epoxy 
+  Component {
+    componentName "Supports Mechanics: Dee CFRP panel bonding epoxy"
+    // location dee 
+    service false
+    scaleOnSensor 0
+ 
+    Element {
+      elementName LoadedEpoxy
+      quantity 278.12      // = 69.53 g (two bonded surfaces per dee) * 4 (all dees have same epoxy).
+                            // Each dee has 2 panels (each panel requires ~17 g loaded epoxy to bond).
+                            // Source: [Joseph Grassi jdg282@cornell.edu].                           
+      unit g                // APPROXIMATION: mass spread across a uniform disk cylinder.
+                            
+    }   
+  }
+  
+    // Supports Mechanics: Cooling Pipe Loaded Epoxy 
+  Component {
+    componentName "Supports Mechanics: Dee cooling pipe bonding epoxy"
+    // location dee  // MB fully works but still need to fix overlaps
+    service false
+    scaleOnSensor 0
+ 
+    Element {
+      elementName LoadedEpoxy
+      quantity 147.96      // = 36.99 g (This much epoxy is deposited to hold flower cooling tube in place) * 4 (all dees have same epoxy).
+                            // Each dee has 2 panels (each panel requires ~17 g loaded epoxy to bond).
+                            // Source: [Joseph Grassi jdg282@cornell.edu].                           
+      unit g                // APPROXIMATION: mass spread across a uniform disk cylinder.
+                            
+    }   
+  }
+  
+    // Supports Mechanics: PPS Dee Inserts 
+  Component {
+    componentName "Supports Mechanics: Dee inserts PPS"
+    // location dee  // MB fully works but still need to fix overlaps
+    service false
+    scaleOnSensor 0
+ 
+    Element {
+      elementName PPS
+      quantity 27.16      // = 6.79 g (100 inserts) * 4 (all dees have same insert number).
+                            // Source: [Joseph Grassi jdg282@cornell.edu].                           
+      unit g                // APPROXIMATION: mass spread across a uniform disk cylinder.
+                            
+    }   
+  }
+    // Supports Mechanics: PEEK Rim
+  Component {
+    componentName "Supports Mechanics: PEEK rim"
+    // location dee  // MB fully works but still need to fix overlaps
+    service false
+    scaleOnSensor 0
+ 
+    Element {
+      elementName PEEK
+      quantity 43.44      // = 10.86 g (mass per single dee rim) * 4 (same rim on all dees)..
+                            // Source: [Joseph Grassi jdg282@cornell.edu].                           
+      unit g                // APPROXIMATION: mass spread across a uniform disk cylinder. This is not accurate to the real dee, all mass will be at rim
+                            
+    }   
+  }
+
+
+}
+
