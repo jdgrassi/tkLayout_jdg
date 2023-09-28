@@ -15,7 +15,7 @@ Kapton	                   1.42	                    C:0.59985105     H:0.08054135
 # Polyimide. from trackermaterial.xml (density 1.40 g/cm3 ?)                        
    
 Acrylate                   1.16                      C:0.5581   H:0.06977    O:0.3720           
-# from materials.xml  (density 1.17 g/cm3 ?)  
+# from materials.xml  (density 1.17 g/cm3 ?)                           
 
 Glass                      2.33	                     Si:0.36611059    O:0.53173295   B:0.042228491  Na:0.059927964       
 # from materials.xml  (density 2.23 g/cm3 ?)
@@ -60,12 +60,21 @@ Graphite_FPX               2.266                   C:1
 Graphite_EPX	             1.65                    C:1
 # Source: [TEPX_2019_04_12_LC]
 
-CF                         1.91                    C:1.0
+DiamondPowder               3.51                   C:1
+# 12-20 micron powder, it is typically mixed with liquids and packing is not an issue.
+
+CF                         1.91                    C:1
 # High density CF. Density from [TBPX_2019_01_15_AB].
 # check compo??
 
 Epoxy	                     1.16                CH2OCN:1	 
 # EX1515 from Duccio, Composite materials, 14/01/2015
+
+EpoxyHysol                   1.14                   C18H20O3:1
+#EA9396 chemical formula not known, but this provides a reasonable estimate for radiation lengths
+
+LoadedEpoxy                 2.16                   DiamondPowder:0.7               EpoxyHysol:0.3
+#Mass mixture 30% EA9396 and 70% Diamond powder
 
 #CFRP	                     1.84	                   C:0.78            Epoxy:0.22
 # from Duccio, Composite materials, 14/01/2015
@@ -117,6 +126,18 @@ LCP                        1.633                  C:0.52     O:0.39     Si:0.08 
 # Composition from pixbarmaterial.xml
 
 
+
+PEEK                            1.32                  C19H14O3:1
+#Unconfirmed density
+
+PPS                            1.35                   C6H4S1:1
+#Unconfirmed density
+
+Graphite_PPS                        1                     PPS:0.7     Graphite_FPX:0.3
+# Added by Joseph (jdg282@cornell.edu) for Purdue mechanics inquiries. Density is temporary, not 1
+
+CF_PPS                          1                         PPS:0.6     CF:0.4
+# Added by Joseph (jdg282@cornell.edu) for Purdue mechanics inquiries. Density is temporary not 1
 
 Parylene	                 1.30	                C8H8:1  
 # from Duccio, Composite materials, 14/01/2015    
